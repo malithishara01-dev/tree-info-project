@@ -1,53 +1,54 @@
 // ----------------------------------------------------------------------------------
-// **1. PASTE YOUR GOOGLE SCRIPT URL HERE!** (from Step 3)
+// 1. PASTE THE GOOGLE SCRIPT URL YOU COPIED IN TASK 1 HERE:
 // ----------------------------------------------------------------------------------
 const GOOGLE_SCRIPT_API_BASE = 'https://script.google.com/macros/s/AKfycbycqarQF__VxioaLmq-NorHzxMOqrjWDgee2cnl4r1c83JA6g6MUf6VbUPpLD2awszCzg/exec'; 
-// Example: 'https://script.google.com/macros/s/AKfycbx_T_v.../exec'
 // ----------------------------------------------------------------------------------
 
-
-// Get the ID parameter from the URL (e.g., '835')
+// Get the ID parameter from the Netlify URL (e.g., '835')
 const urlParams = new URLSearchParams(window.location.search);
 const plantId = urlParams.get('id');
 
-// If an ID is found in the URL, try to fetch the data
+// If an ID is found, try to fetch the data
 if (plantId) {
-    // Combine the base URL with the plant ID to create the full request URL
     const fetchUrl = `${GOOGLE_SCRIPT_API_BASE}?id=${plantId}`;
 
     fetch(fetchUrl)
         .then(response => response.json())
         .then(data => {
-            // Check if valid data was returned from the script
+            // Check if valid data was returned from the script (using a column name from your sheet)
             if (data && data.Scientific_Name) {
-                // SUCCESS: Update the website fields with data from the Google Sheet
+                // SUCCESS: Update the website fields
 
-                // Clear any error message
-                document.getElementById('error-message').innerText = ""; 
-
-                // Update the Scientific Name
+                // **2. CUSTOMIZE: Update the element IDs below to match your HTML**
                 document.getElementById('scientific-name').innerText = data.Scientific_Name; 
-                
-                // Update the Family
                 document.getElementById('family').innerText = data.Family;
+                document.getElementById('medicinal-value').innerText = data.Medicinal_Value; 
+                // ... add other fields like Origin, Status, etc.
                 
-                // Update the Medicinal Value
-                document.getElementById('medicinal-value').innerText = data.Medicinal_Value;
-                
-                // Add logic to update the other fields (Origin, etc.) if needed
-                
+                document.getElementById('error-message').innerText = ""; // Clear error
             } else {
-                // Data was not found in the sheet (Plant ID is wrong or row is empty)
+                // Data not found in the sheet for that ID
                 document.getElementById('error-message').innerText = "Plant ID found in URL, but no matching data found in the Google Sheet.";
             }
         })
         .catch(error => {
-            // Error if the network request fails (e.g., bad URL)
-            document.getElementById('error-message').innerText = "Failed to connect to the data source. Check the API URL.";
+            // Network failure—this is the error that likely causes the "Loading..." state
+            document.getElementById('error-message').innerText = "Failed to connect to the data source.";
             console.error('Fetch error:', error);
         });
 } else {
-    // If no ID is found (e.g., visiting the site with no ?id=)
+    // No Plant ID Found in URL
     document.getElementById('error-message').innerText = "Error: No Plant ID Found in URL.";
 }
 
+---
+
+## 🚀 Task 3: Redeploy Your Website to Netlify
+
+The change won't appear until you update your site on Netlify.
+
+1.  **Save** your local JavaScript file.
+2.  **Commit and Push** the changes to your GitHub/GitLab repository.
+3.  Netlify will automatically build and deploy the new version of your website with the correct API link.
+
+Once these steps are complete, the website should successfully load the data for `?id=835` (Sudu handun) instead of getting stuck on loading.
