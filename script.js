@@ -50,3 +50,4 @@ if (plantId) {
     // If no ID is found (e.g., visiting the site with no ?id=)
     document.getElementById('error-message').innerText = "Error: No Plant ID Found in URL.";
 }
+
