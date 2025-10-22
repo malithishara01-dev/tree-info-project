@@ -1,7 +1,7 @@
 // ----------------------------------------------------------------------------------
 // 1. PASTE THE GOOGLE SCRIPT URL YOU COPIED IN TASK 1 HERE:
 // ----------------------------------------------------------------------------------
-const GOOGLE_SCRIPT_API_BASE = 'https://script.google.com/macros/s/AKfycbyWWFHP0cymDVvqKTN5Fx3i0-AdsWok0YTc1VU-NpUM8xOvpbnbyHk56kRlZbK4tt4rIA/exec'; 
+const GOOGLE_SCRIPT_API_BASE = 'https://script.google.com/macros/s/AKfycbxsi56KKcMvEp4UWOTTGKJJvHbKpm1h71dHVWZfJtzb_nx4iME_tps1e-GWZaAIoaCK6A/exec'; 
 // ----------------------------------------------------------------------------------
 
 // Get the ID parameter from the Netlify URL (e.g., '835')
@@ -52,4 +52,5 @@ The change won't appear until you update your site on Netlify.
 3.  Netlify will automatically build and deploy the new version of your website with the correct API link.
 
 Once these steps are complete, the website should successfully load the data for `?id=835` (Sudu handun) instead of getting stuck on loading.
+
 
